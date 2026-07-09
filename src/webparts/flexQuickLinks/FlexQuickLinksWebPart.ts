@@ -16,25 +16,25 @@ import { ICardItem, IQuickLinksCardsProps } from './components/IQuickLinksCardsP
 import Cards from './components/FlexQuickLinks';
 
 const ICON_OPTIONS = [
-  { key: 'apps',     text: 'Apps / Kacheln' },
-  { key: 'flow',     text: 'Flow / Pfeile' },
-  { key: 'box',      text: 'Quadrat' },
-  { key: 'grid',     text: 'Raster' },
+  { key: 'apps',     text: 'Apps / Tiles' },
+  { key: 'flow',     text: 'Flow / Arrows' },
+  { key: 'box',      text: 'Square' },
+  { key: 'grid',     text: 'Grid' },
   { key: 'plus',     text: 'Plus' },
-  { key: 'doc',      text: 'Dokument' },
-  { key: 'link',     text: 'Link / Kette' },
-  { key: 'star',     text: 'Stern' },
-  { key: 'home',     text: 'Startseite' },
-  { key: 'settings', text: 'Einstellungen' },
-  { key: 'chart',    text: 'Diagramm' },
-  { key: 'mail',     text: 'E-Mail' },
-  { key: 'calendar', text: 'Kalender' },
-  { key: 'people',   text: 'Personen' },
-  { key: 'folder',   text: 'Ordner' },
-  { key: 'search',   text: 'Suche' },
+  { key: 'doc',      text: 'Document' },
+  { key: 'link',     text: 'Link / Chain' },
+  { key: 'star',     text: 'Star' },
+  { key: 'home',     text: 'Home' },
+  { key: 'settings', text: 'Settings' },
+  { key: 'chart',    text: 'Chart' },
+  { key: 'mail',     text: 'Email' },
+  { key: 'calendar', text: 'Calendar' },
+  { key: 'people',   text: 'People' },
+  { key: 'folder',   text: 'Folder' },
+  { key: 'search',   text: 'Search' },
   { key: 'cloud',    text: 'Cloud' },
-  { key: 'lock',     text: 'Sicherheit / Schloss' },
-  { key: 'list',     text: 'Liste' },
+  { key: 'lock',     text: 'Security / Lock' },
+  { key: 'list',     text: 'List' },
 ];
 
 const DEFAULT_CARDS: ICardItem[] = [
@@ -99,29 +99,29 @@ export default class CardsWebPart extends BaseClientSideWebPart<IQuickLinksCards
     for (let i = 0; i < (this.properties.cardsCount || 6); i++) {
       if (i > 0) fields.push(PropertyPaneHorizontalRule());
       fields.push(
-        PropertyPaneLabel(`_lbl${i}`, { text: `Kachel ${i + 1}` }),
-        PropertyPaneTextField(`cards[${i}].title`, { label: 'Bezeichnung' }),
-        PropertyPaneTextField(`cards[${i}].url`,   { label: 'Link' }),
+        PropertyPaneLabel(`_lbl${i}`, { text: `Tile ${i + 1}` }),
+        PropertyPaneTextField(`cards[${i}].title`, { label: 'Title' }),
+        PropertyPaneTextField(`cards[${i}].url`,   { label: 'URL' }),
         PropertyPaneTextField(`cards[${i}].tooltip`, { label: 'Tooltip (optional)' }),
         PropertyPaneDropdown(`cards[${i}].iconName`, {
-          label: 'Symbol',
+          label: 'Icon',
           options: ICON_OPTIONS,
           selectedKey: this.properties.cards?.[i]?.iconName || 'apps'
         }),
         PropertyPaneTextField(`cards[${i}].bgColor`, {
-          label: 'Hintergrundfarbe (HEX, optional)',
+          label: 'Background color (HEX, optional)',
           placeholder: '#2b5ce6'
         }),
         PropertyPaneTextField(`cards[${i}].iconColor`, {
-          label: 'Symbolfarbe (HEX, leer = bela)',
+          label: 'Icon color (HEX, empty = white)',
           placeholder: '#ffffff'
         }),
         PropertyPaneTextField(`cards[${i}].titleColor`, {
-          label: 'Boja teksta (HEX, leer = bela)',
+          label: 'Text color (HEX, empty = white)',
           placeholder: '#ffffff'
         }),
         PropertyPaneToggle(`cards[${i}].openInNewTab`, {
-          label: 'In neuem Tab öffnen'
+          label: 'Open in new tab'
         })
       );
     }
@@ -133,29 +133,29 @@ export default class CardsWebPart extends BaseClientSideWebPart<IQuickLinksCards
     return {
       pages: [
         {
-          header: { description: 'Kacheleinstellungen' },
+          header: { description: 'Tile settings' },
           groups: [
             {
-              groupName: 'Allgemein',
+              groupName: 'General',
               groupFields: [
                 PropertyPaneTextField('sectionTitle', {
-                  label: 'Abschnittstitel (optional)',
-                  placeholder: 'z.B. Meine Links'
+                  label: 'Section title (optional)',
+                  placeholder: 'e.g. My Links'
                 }),
                 PropertyPaneSlider('cardsCount', {
-                  label: 'Anzahl der Kacheln',
+                  label: 'Number of tiles',
                   min: 3,
                   max: 6,
                   showValue: true
                 }),
                 PropertyPaneTextField('brandColor', {
-                  label: 'Markenfarbe (HEX)',
+                  label: 'Brand color (HEX)',
                   placeholder: '#2b5ce6'
                 })
               ]
             },
             {
-              groupName: 'Kacheln',
+              groupName: 'Tiles',
               groupFields: this._cardFields()
             }
           ]

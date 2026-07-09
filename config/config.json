@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/config.2.0.schema.json",
+  "version": "2.0",
+  "bundles": {
+    "flex-quick-links-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/flexQuickLinks/FlexQuickLinksWebPart.js",
+          "manifest": "./src/webparts/flexQuickLinks/FlexQuickLinksWebPart.manifest.json"
+        }
+      ]
+    }
+  },
+  "externals": {},
+  "localizedResources": {
+    "FlexQuickLinksWebPartStrings": "lib/webparts/flexQuickLinks/loc/{locale}.js"
+  }
+}

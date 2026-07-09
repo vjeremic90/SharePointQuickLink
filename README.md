@@ -1,73 +1,97 @@
-# quick-links
+# SharePoint Quick Links for Blog
 
-## Summary
+An SPFx web part for displaying customizable quick-link cards that point to important pages and sections.
 
-Short summary on functionality and used technologies.
+Created for site/blog:
+http://vujeremic.blog/
 
-[picture of the solution in action, if possible]
+## What This Project Does
 
-## Used SharePoint Framework Version
+- Displays 3 to 6 quick-link cards.
+- Each card supports title, URL, tooltip, icon, and optional colors.
+- Supports opening links in a new browser tab.
+- Includes `sectionTitle` and `brandColor` for visual branding.
 
-![version](https://img.shields.io/badge/version-1.20.0-green.svg)
+## Tech Stack
 
-## Applies to
-
-- [SharePoint Framework](https://aka.ms/spfx)
-- [Microsoft 365 tenant](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
-
-> Get your own free development tenant by subscribing to [Microsoft 365 developer program](http://aka.ms/o365devprogram)
+- SharePoint Framework `1.20.0`
+- React `17`
+- TypeScript `4.7`
+- Gulp build pipeline
 
 ## Prerequisites
 
-> Any special pre-requisites?
+- Node.js `18.17.x` (recommended: `18.17.1`)
+- npm `9+`
+- SharePoint Online tenant with App Catalog enabled
 
-## Solution
+## Run Locally
 
-| Solution    | Author(s)                                               |
-| ----------- | ------------------------------------------------------- |
-| folder name | Author details (name, company, twitter alias with link) |
+1. Install dependencies:
 
-## Version history
+```bash
+npm install
+```
 
-| Version | Date             | Comments        |
-| ------- | ---------------- | --------------- |
-| 1.1     | March 10, 2021   | Update comment  |
-| 1.0     | January 29, 2021 | Initial release |
+2. Start development build:
 
-## Disclaimer
+```bash
+gulp serve
+```
 
-**THIS CODE IS PROVIDED _AS IS_ WITHOUT WARRANTY OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING ANY IMPLIED WARRANTIES OF FITNESS FOR A PARTICULAR PURPOSE, MERCHANTABILITY, OR NON-INFRINGEMENT.**
+3. Create production bundle:
 
----
+```bash
+gulp bundle --ship
+```
 
-## Minimal Path to Awesome
+4. Create deployment package:
 
-- Clone this repository
-- Ensure that you are at the solution folder
-- in the command-line run:
-  - **npm install**
-  - **gulp serve**
+```bash
+gulp package-solution --ship
+```
 
-> Include any additional steps as needed.
+The package is generated in:
+`sharepoint/solution/*.sppkg`
 
-## Features
+## Deploy to SharePoint
 
-Description of the extension that expands upon high-level summary above.
+1. Upload the `.sppkg` file to your tenant App Catalog.
+2. Confirm tenant-wide deployment if needed.
+3. Add the web part to a modern SharePoint page.
+4. Configure cards, colors, and URLs in the property pane.
 
-This extension illustrates the following concepts:
+## Card Configuration
 
-- topic 1
-- topic 2
-- topic 3
+Each card supports:
 
-> Notice that better pictures and documentation will increase the sample usage and the value you are providing for others. Thanks for your submissions advance.
+- `title`
+- `url`
+- `tooltip` (optional)
+- `iconName`
+- `bgColor` (HEX, optional)
+- `iconColor` (HEX, optional)
+- `titleColor` (HEX, optional)
+- `openInNewTab` (true/false)
 
-> Share your web part with others through Microsoft 365 Patterns and Practices program to get visibility and exposure. More details on the community, open-source projects and other activities from http://aka.ms/m365pnp.
+Example valid HEX value: `#2b5ce6`
 
-## References
+## Useful npm Scripts
 
-- [Getting started with SharePoint Framework](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/set-up-your-developer-tenant)
-- [Building for Microsoft teams](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/build-for-teams-overview)
-- [Use Microsoft Graph in your solution](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/web-parts/get-started/using-microsoft-graph-apis)
-- [Publish SharePoint Framework applications to the Marketplace](https://docs.microsoft.com/en-us/sharepoint/dev/spfx/publish-to-marketplace-overview)
-- [Microsoft 365 Patterns and Practices](https://aka.ms/m365pnp) - Guidance, tooling, samples and open-source controls for your Microsoft 365 development
+- `npm run build` -> `gulp bundle`
+- `npm run clean` -> `gulp clean`
+- `npm run test` -> `gulp test`
+
+## Note
+
+If you change property pane structure or interfaces, run a clean build:
+
+```bash
+gulp clean
+gulp bundle
+```
+
+## Author
+
+- Vukasin Jeremic
+- Blog: http://vujeremic.blog/
